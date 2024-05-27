@@ -21,8 +21,8 @@ class NetworkManager {
         }
     }
 
-    fun <T> createApi(apiClass: Class<T>): T {
-        val client = NetworkClient.getNetworkClientInstance()
+    fun <T> createApi(apiClass: Class<T>, baseUrl: String? = null): T {
+        val client = NetworkClient.getNetworkClientInstance(baseUrl)
         return client.create(apiClass)
     }
 }

@@ -1,15 +1,7 @@
 package com.draja.rickmorty.data.network.response
 
 data class CharactersResponse(
-    val info: PaginationResponse = PaginationResponse(),
     val results: List<CharacterResponse> = emptyList()
-)
-
-data class PaginationResponse(
-    val count: Int = 0,
-    val pages: Int = 0,
-    val next: String? = "",
-    val prev: String? = ""
 )
 
 data class CharacterResponse(

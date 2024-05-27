@@ -4,19 +4,12 @@ import com.draja.rickmorty.data.network.response.CharacterResponse
 import com.draja.rickmorty.data.network.response.CharactersResponse
 import com.draja.rickmorty.data.network.response.LocationResponse
 import com.draja.rickmorty.data.network.response.OriginResponse
-import com.draja.rickmorty.data.network.response.PaginationResponse
 import com.draja.rickmorty.data.repository.CharacterRepository
 
 class StubCharacterRepositoryImpl : CharacterRepository {
 
     override suspend fun getAllCharacters(): Result<CharactersResponse> = Result.success(
         CharactersResponse(
-            info = PaginationResponse(
-                count = 1,
-                pages = 1,
-                next = null,
-                prev = null
-            ),
             results = listOf(
                 CharacterResponse(
                     id = 1,

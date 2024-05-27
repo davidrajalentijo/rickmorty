@@ -7,9 +7,9 @@ internal object NetworkClient {
 
     private const val BASE_URL = "https://rickandmortyapi.com/api/"
 
-    fun getNetworkClientInstance(): Retrofit =
+    fun getNetworkClientInstance(baseUrl: String?): Retrofit =
         Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(baseUrl ?: BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 }

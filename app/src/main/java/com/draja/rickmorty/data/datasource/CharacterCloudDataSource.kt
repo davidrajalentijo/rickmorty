@@ -6,13 +6,15 @@ import com.draja.rickmorty.data.network.response.CharactersResponse
 import com.draja.rickmorty.data.network.CharactersRestService
 import retrofit2.HttpException
 
-class CharacterCloudDataSource {
+class CharacterCloudDataSource(
+    private val baseUrl: String? = null
+) {
 
     @Suppress("TooGenericExceptionCaught")
     suspend fun getAllCharacters(): Result<CharactersResponse> =
         try {
             val api =
-                NetworkManager.getInstance()?.createApi(CharactersRestService::class.java)
+                NetworkManager.getInstance()?.createApi(CharactersRestService::class.java, baseUrl)
 
             val response = api?.getAllCharacters()
 
@@ -30,7 +32,7 @@ class CharacterCloudDataSource {
     @Suppress("TooGenericExceptionCaught")
     suspend fun getCharacterById(id: String): Result<CharacterResponse> =
         try {
-            val api = NetworkManager.getInstance()?.createApi(CharactersRestService::class.java)
+            val api = NetworkManager.getInstance()?.createApi(CharactersRestService::class.java, baseUrl)
 
             val response = api?.getCharacterById(id)
 

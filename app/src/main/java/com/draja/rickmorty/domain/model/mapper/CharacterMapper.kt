@@ -4,25 +4,14 @@ import com.draja.rickmorty.data.network.response.CharacterResponse
 import com.draja.rickmorty.data.network.response.CharactersResponse
 import com.draja.rickmorty.data.network.response.LocationResponse
 import com.draja.rickmorty.data.network.response.OriginResponse
-import com.draja.rickmorty.data.network.response.PaginationResponse
 import com.draja.rickmorty.domain.model.CharacterModel
 import com.draja.rickmorty.domain.model.CharactersModel
 import com.draja.rickmorty.domain.model.LocationModel
 import com.draja.rickmorty.domain.model.OriginModel
-import com.draja.rickmorty.domain.model.PaginationModel
 
 fun CharactersResponse.toModel(): CharactersModel =
     CharactersModel(
-        info = info.toModel(),
         results = results.map { it.toModel() }
-    )
-
-fun PaginationResponse.toModel(): PaginationModel =
-    PaginationModel(
-        count = count,
-        pages = pages,
-        next = next,
-        prev = prev
     )
 
 fun CharacterResponse.toModel(): CharacterModel =
