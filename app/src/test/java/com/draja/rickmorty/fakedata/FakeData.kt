@@ -9,6 +9,8 @@ val exception = Exception()
 
 val fakeCharacterId = "1"
 
+val fakePage = 1
+
 val charactersResponse = CharactersResponse(
     results = listOf(
         CharacterResponse(

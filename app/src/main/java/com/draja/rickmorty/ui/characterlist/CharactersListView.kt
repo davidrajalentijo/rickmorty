@@ -11,7 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Button
@@ -22,8 +22,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -31,11 +29,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
+import androidx.paging.LoadState
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
-import com.draja.rickmorty.Screens
+import com.draja.rickmorty.data.network.response.CharacterResponse
+import com.draja.rickmorty.navigation.Screens
 import com.draja.rickmorty.domain.model.CharacterModel
+import com.draja.rickmorty.domain.model.mapper.toModel
 import com.draja.ui.foundations.Spacing
-import com.draja.ui.ViewState
 import com.draja.ui.extensions.setTestID
 import com.draja.ui.theme.Colors
 import org.koin.androidx.compose.koinViewModel
@@ -49,7 +51,7 @@ fun CharactersListView(
     navController: NavController
 ) {
 
-    val charactersList by viewModel.characters.collectAsState()
+    val characters = viewModel.charactersPagination.collectAsLazyPagingItems()
 
     Scaffold(
         topBar = {
@@ -66,25 +68,29 @@ fun CharactersListView(
                 .padding(it)
         ) {
 
-            when (charactersList) {
-                is ViewState.Loading -> {
+            when {
+                characters.loadState.refresh is LoadState.Loading -> {
 
                     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                         CircularProgressIndicator()
                     }
                 }
 
-                is ViewState.Success -> {
-                    CardList(characters = (charactersList as ViewState.Success).data, navController)
-                }
-
-                is ViewState.Error -> {
+                characters.loadState.refresh is LoadState.Error -> {
                     ErrorView {
-                        viewModel.getAllCharacters()
+                        characters.retry()
                     }
                 }
 
-                else -> {}
+                characters.loadState.append is LoadState.Error -> {
+                    ErrorView {
+                        characters.retry()
+                    }
+                }
+
+                else -> {
+                    CardList(characters, navController)
+                }
             }
         }
     }
@@ -92,12 +98,17 @@ fun CharactersListView(
 
 @Composable
 fun CardList(
-    characters: List<CharacterModel>,
-    navController: NavController
+    characters: LazyPagingItems<CharacterResponse>,
+    navController: NavController,
 ) {
-    LazyColumn {
-        items(characters) { character ->
-            CardItem(character = character, navController)
+    val listState = rememberLazyListState()
+
+    LazyColumn(state = listState) {
+        items(characters.itemCount) { index ->
+            val item = characters[index]
+            if (item != null) {
+                CardItem(character = item.toModel(), navController)
+            }
         }
     }
 }

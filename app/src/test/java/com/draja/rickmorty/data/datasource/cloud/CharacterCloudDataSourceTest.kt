@@ -7,6 +7,7 @@ import com.draja.network.NetworkManager
 import com.draja.rickmorty.data.datasource.CharacterCloudDataSource
 import com.draja.rickmorty.fakedata.characterResponse
 import com.draja.rickmorty.fakedata.charactersResponse
+import com.draja.rickmorty.fakedata.fakePage
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -46,7 +47,7 @@ class CharacterCloudDataSourceTest {
 
         mockWebServer.enqueue(response)
 
-        val actual = characterCloudDataSource.getAllCharacters()
+        val actual = characterCloudDataSource.getAllCharacters(fakePage)
 
         assertThat(actual.getOrNull()).isEqualTo(charactersResponse)
     }
@@ -58,7 +59,7 @@ class CharacterCloudDataSourceTest {
                 .setResponseCode(500)
             mockWebServer.enqueue(response)
 
-            val actual = characterCloudDataSource.getAllCharacters()
+            val actual = characterCloudDataSource.getAllCharacters(fakePage)
 
             assertTrue(actual.isFailure)
             assertThat(actual.exceptionOrNull()?.message).isNotNull()

@@ -6,11 +6,14 @@ import com.draja.rickmorty.data.network.response.CharacterResponse
 import com.draja.rickmorty.data.network.response.CharactersResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface CharactersRestService {
 
     @GET(GET_CHARACTER)
-    suspend fun getAllCharacters(): CharactersResponse
+    suspend fun getAllCharacters(
+        @Query("page") page: Int
+    ): CharactersResponse
 
     @GET(GET_CHARACTER_BY_ID)
     suspend fun getCharacterById(

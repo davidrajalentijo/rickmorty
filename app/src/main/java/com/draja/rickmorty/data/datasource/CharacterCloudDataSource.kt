@@ -11,12 +11,12 @@ class CharacterCloudDataSource(
 ) {
 
     @Suppress("TooGenericExceptionCaught")
-    suspend fun getAllCharacters(): Result<CharactersResponse> =
+    suspend fun getAllCharacters(page: Int): Result<CharactersResponse> =
         try {
             val api =
                 NetworkManager.getInstance()?.createApi(CharactersRestService::class.java, baseUrl)
 
-            val response = api?.getAllCharacters()
+            val response = api?.getAllCharacters(page)
 
             response?.let {
                 return Result.success(it)

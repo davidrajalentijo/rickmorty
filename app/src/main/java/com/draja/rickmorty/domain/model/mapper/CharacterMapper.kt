@@ -2,16 +2,27 @@ package com.draja.rickmorty.domain.model.mapper
 
 import com.draja.rickmorty.data.network.response.CharacterResponse
 import com.draja.rickmorty.data.network.response.CharactersResponse
+import com.draja.rickmorty.data.network.response.InfoResponse
 import com.draja.rickmorty.data.network.response.LocationResponse
 import com.draja.rickmorty.data.network.response.OriginResponse
 import com.draja.rickmorty.domain.model.CharacterModel
 import com.draja.rickmorty.domain.model.CharactersModel
+import com.draja.rickmorty.domain.model.InfoModel
 import com.draja.rickmorty.domain.model.LocationModel
 import com.draja.rickmorty.domain.model.OriginModel
 
 fun CharactersResponse.toModel(): CharactersModel =
     CharactersModel(
+        info = info.toModel(),
         results = results.map { it.toModel() }
+    )
+
+fun InfoResponse.toModel(): InfoModel =
+    InfoModel(
+        count = count,
+        pages = pages,
+        next = next,
+        prev = prev
     )
 
 fun CharacterResponse.toModel(): CharacterModel =

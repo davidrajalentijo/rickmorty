@@ -1,4 +1,4 @@
-package com.draja.rickmorty
+package com.draja.rickmorty.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost

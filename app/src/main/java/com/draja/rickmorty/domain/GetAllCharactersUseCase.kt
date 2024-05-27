@@ -8,6 +8,8 @@ class GetAllCharactersUseCase(
     private val characterRepository: CharacterRepository
 ) {
 
-    suspend fun getAllCharacters(): Result<CharactersModel> =
-        characterRepository.getAllCharacters().map { it.toModel() }
+    suspend fun getAllCharacters(page: Int = 1): Result<CharactersModel> =
+        characterRepository.getAllCharacters(page).map { it.toModel() }
+
+    fun getCharactersPaginated() = characterRepository.getPaginationSource()
 }

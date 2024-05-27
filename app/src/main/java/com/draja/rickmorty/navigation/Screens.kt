@@ -1,4 +1,4 @@
-package com.draja.rickmorty
+package com.draja.rickmorty.navigation
 
 sealed class Screens(val route: String) {
     data object CharactersListScreens : Screens("charactersList")

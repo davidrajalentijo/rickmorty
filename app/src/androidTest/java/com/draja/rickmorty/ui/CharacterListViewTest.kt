@@ -5,10 +5,12 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.performClick
 import androidx.test.core.app.launchActivity
 import com.draja.rickmorty.MainActivity
 import com.draja.rickmorty.di.stubCharacterDetailsModule
 import com.draja.rickmorty.di.stubCharacterErrorModule
+import com.draja.rickmorty.ui.characterdetail.CharacterDetailsIds
 import com.draja.rickmorty.ui.characterlist.CharacterListIds
 import org.junit.Before
 import org.junit.Rule
@@ -35,6 +37,16 @@ class CharacterListViewTest {
 
         composeTestRule.onAllNodes(hasTestTag(CharacterListIds.CHARACTER_LIST_ELEMENT))
             .assertCountEquals(1)
+    }
+
+    @Test
+    fun character_list_click_element_go_to_details() {
+
+        launchActivity<MainActivity>()
+
+        composeTestRule.onNodeWithTag(CharacterListIds.CHARACTER_LIST_ELEMENT).performClick()
+
+        composeTestRule.onNodeWithTag(CharacterDetailsIds.CHARACTER_NAME).assertIsDisplayed()
     }
 
     @Test
