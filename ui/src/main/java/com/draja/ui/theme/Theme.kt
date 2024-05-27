@@ -1,4 +1,4 @@
-package com.draja.rickmorty.ui.theme
+package com.draja.ui.theme
 
 import android.app.Activity
 import android.os.Build
