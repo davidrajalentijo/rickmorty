@@ -16,14 +16,12 @@ class GetAllCharactersUseCaseTest {
     private val characterRepository = mockk<CharacterRepository>()
     private val getAllCharactersUseCase = GetAllCharactersUseCase(characterRepository)
 
-
     @Test
     fun `GetAllCharacters use case SUCCESS`() {
         runBlocking {
             coEvery {
                 characterRepository.getAllCharacters()
             } returns Result.success(charactersResponse)
-
 
             val actual = getAllCharactersUseCase.getAllCharacters()
 
@@ -36,7 +34,6 @@ class GetAllCharactersUseCaseTest {
         coEvery {
             characterRepository.getAllCharacters()
         } returns Result.failure(exception)
-
 
         val actual = getAllCharactersUseCase.getAllCharacters()
 

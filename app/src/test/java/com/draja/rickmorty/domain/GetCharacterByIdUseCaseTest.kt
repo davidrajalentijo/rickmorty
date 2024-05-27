@@ -17,14 +17,12 @@ class GetCharacterByIdUseCaseTest {
     private val characterRepository = mockk<CharacterRepository>()
     private val getCharacterByIdUseCase = GetCharacterByIdUseCase(characterRepository)
 
-
     @Test
     fun `GetCharacterById use case SUCCESS`() {
         runBlocking {
             coEvery {
                 characterRepository.getCharacterById(fakeCharacterId)
             } returns Result.success(characterResponse)
-
 
             val actual = getCharacterByIdUseCase.getCharacterById(fakeCharacterId)
 
@@ -37,7 +35,6 @@ class GetCharacterByIdUseCaseTest {
         coEvery {
             characterRepository.getCharacterById(fakeCharacterId)
         } returns Result.failure(exception)
-
 
         val actual = getCharacterByIdUseCase.getCharacterById(fakeCharacterId)
 

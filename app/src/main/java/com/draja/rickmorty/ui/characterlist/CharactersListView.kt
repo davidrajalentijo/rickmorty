@@ -32,13 +32,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.draja.rickmorty.Screen
+import com.draja.rickmorty.Screens
 import com.draja.rickmorty.domain.model.CharacterModel
-import com.draja.ui.theme.greenBackground
 import com.draja.ui.foundations.Spacing
 import com.draja.ui.ViewState
 import com.draja.ui.extensions.setTestID
+import com.draja.ui.theme.Colors
 import org.koin.androidx.compose.koinViewModel
+
+const val IMAGE_ROUNDING = 50
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -55,7 +57,7 @@ fun CharactersListView(
                 title = { Text(text = stringResource(id = com.draja.ui.R.string.Characters_title)) },
             )
         },
-        containerColor = greenBackground
+        containerColor = Colors.greenBackground
     ) {
 
         Column(
@@ -84,7 +86,6 @@ fun CharactersListView(
 
                 else -> {}
             }
-
         }
     }
 }
@@ -111,7 +112,7 @@ fun CardItem(
             .setTestID(CharacterListIds.CHARACTER_LIST_ELEMENT)
             .padding(Spacing.m)
             .clickable {
-                navController.navigate(Screen.CharacterDetailScreen.createRoute(character.id.toString()))
+                navController.navigate(Screens.CharacterDetailScreens.createRoute(character.id.toString()))
             },
         shape = RoundedCornerShape(Spacing.s)
     ) {
@@ -126,7 +127,7 @@ fun CardItem(
                 model = character.image,
                 contentDescription = null,
                 modifier = Modifier
-                    .clip(RoundedCornerShape(50))
+                    .clip(RoundedCornerShape(IMAGE_ROUNDING))
                     .size(Spacing.xxl),
                 contentScale = ContentScale.Crop
             )

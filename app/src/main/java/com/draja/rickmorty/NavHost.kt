@@ -12,11 +12,11 @@ fun AppNavHost() {
 
     val navController = rememberNavController()
 
-    NavHost(navController, Screen.CharactersListScreen.route) {
-        composable(Screen.CharactersListScreen.route) {
+    NavHost(navController, Screens.CharactersListScreens.route) {
+        composable(Screens.CharactersListScreens.route) {
             CharactersListView(navController = navController)
         }
-        composable(Screen.CharacterDetailScreen.route) { backStackEntry ->
+        composable(Screens.CharacterDetailScreens.route) { backStackEntry ->
             val characterId = backStackEntry.arguments?.getString("characterId")
             if (characterId != null) {
                 CharacterDetailView(characterId = characterId) {

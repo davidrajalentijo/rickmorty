@@ -34,11 +34,11 @@ import androidx.compose.ui.text.style.TextAlign
 import coil.compose.AsyncImage
 import com.draja.rickmorty.domain.model.CharacterModel
 import com.draja.ui.R
-import com.draja.ui.theme.greenBackground
 import com.draja.ui.components.GroupRow
 import com.draja.ui.foundations.Spacing
 import com.draja.ui.ViewState
 import com.draja.ui.extensions.setTestID
+import com.draja.ui.theme.Colors
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -66,9 +66,8 @@ fun CharacterDetailView(
                 }
             )
         },
-        containerColor = greenBackground
+        containerColor = Colors.greenBackground
     ) { paddingValues ->
-
 
         when (character) {
             is ViewState.Loading -> {
@@ -98,7 +97,6 @@ fun CharacterDetailView(
         }
     }
 }
-
 
 @Composable
 fun SuccessView(
@@ -130,7 +128,6 @@ fun SuccessView(
         )
 
         CharacterInfoCard(characterData)
-
     }
 }
 
@@ -176,7 +173,6 @@ fun CharacterInfoCard(characterData: CharacterModel) {
                 value = characterData.location.name
             )
         }
-
     }
 }
 

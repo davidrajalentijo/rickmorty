@@ -8,6 +8,7 @@ import retrofit2.HttpException
 
 class CharacterCloudDataSource {
 
+    @Suppress("TooGenericExceptionCaught")
     suspend fun getAllCharacters(): Result<CharactersResponse> =
         try {
             val api =
@@ -18,7 +19,6 @@ class CharacterCloudDataSource {
             response?.let {
                 return Result.success(it)
             } ?: Result.failure(Exception("Characters not found"))
-
         } catch (e: HttpException) {
             Result.failure(e)
         } catch (e: IllegalArgumentException) {
@@ -27,7 +27,7 @@ class CharacterCloudDataSource {
             Result.failure(throwable)
         }
 
-
+    @Suppress("TooGenericExceptionCaught")
     suspend fun getCharacterById(id: String): Result<CharacterResponse> =
         try {
             val api = NetworkManager.getInstance()?.createApi(CharactersRestService::class.java)
@@ -37,7 +37,6 @@ class CharacterCloudDataSource {
             response?.let {
                 return Result.success(it)
             } ?: Result.failure(Exception("Character not found"))
-
         } catch (e: HttpException) {
             Result.failure(e)
         } catch (e: IllegalArgumentException) {

@@ -1,6 +1,5 @@
 package com.draja.rickmorty.domain.model
 
-
 data class CharactersModel(
     val info: PaginationModel,
     val results: List<CharacterModel>
@@ -17,7 +16,7 @@ data class CharacterModel(
     val id: Int = 0,
     val name: String = "",
     val status: String = "",
-    val species: String ="",
+    val species: String = "",
     val type: String = "",
     val gender: String = "",
     val origin: OriginModel = OriginModel(),
@@ -27,8 +26,8 @@ data class CharacterModel(
 )
 
 data class OriginModel(
-    val name: String ="",
-    val url: String =""
+    val name: String = "",
+    val url: String = ""
 )
 
 data class LocationModel(
