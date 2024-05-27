@@ -7,7 +7,6 @@ import com.draja.network.NetworkManager
 import com.draja.rickmorty.data.datasource.CharacterCloudDataSource
 import com.draja.rickmorty.fakedata.characterResponse
 import com.draja.rickmorty.fakedata.charactersResponse
-import io.mockk.mockkObject
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
