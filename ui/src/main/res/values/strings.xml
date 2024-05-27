@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Character_status_label">Status</string>
+    <string name="Character_status_species">Species</string>
+    <string name="Character_status_type">Type</string>
+    <string name="Character_status_gender">Gender</string>
+    <string name="Character_status_origin">Origin</string>
+    <string name="Character_status_location">Location</string>
+    <string name="GLOBAL_ERROR">An error occurred</string>
+    <string name="Try_again">Try again</string>
+    <string name="Characters_title">Characters</string>
+</resources>

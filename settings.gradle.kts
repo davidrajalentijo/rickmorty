@@ -10,6 +10,9 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
     }
+    plugins {
+        id("io.gitlab.arturbosch.detekt") version "1.23.6"
+    }
 }
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
@@ -21,3 +24,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "rickmorty"
 include(":app")
+include(":network")
+include(":ui")
