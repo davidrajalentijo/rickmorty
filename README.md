@@ -46,6 +46,9 @@ The application has the following features:
 - Explore characters from the Rick and Morty series.
 - Details of each character.
 
+https://github.com/davidrajalentijo/rickmorty/assets/6725999/f65d87d3-10b0-41fa-8aa8-53ec6005102f
+
+https://github.com/davidrajalentijo/rickmorty/assets/6725999/ae3437d7-a3b4-429c-9375-9a7ee7059d18
 
 ## Roadmap
 
