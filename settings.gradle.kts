@@ -21,3 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "rickmorty"
 include(":app")
+include(":network")
+include(":ui")
